@@ -1,8 +1,14 @@
-import { MongoClient } from "https://deno.land/x/mongo@v0.7.0/mod.ts";
+import { MongoClient, Database } from "https://deno.land/x/mongo@v0.7.0/mod.ts";
 
-const client = new MongoClient();
-client.connectWithUri("mongodb://localhost:27017");
+class DbConnection {
+  public db: Database;
 
-const db = client.database("test");
+  constructor() {
+    const client = new MongoClient();
+    client.connectWithUri("mongodb://localhost:27017");
 
-export default db;
+    this.db = client.database("test");
+  }
+}
+
+export default DbConnection;

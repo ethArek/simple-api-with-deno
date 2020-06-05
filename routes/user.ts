@@ -1,14 +1,9 @@
-import { Router } from "https://deno.land/x/oak/mod.ts";
 import db from "../db/mod.ts";
+import { router } from "../lib/router.ts";
 
-const router = new Router();
 const API_URL = "/api/v1/users";
 
 router.get(`${API_URL}`, async (context) => {
-  const users = await db
-    .collection("users")
-    .find();
-
   context.response.body = {
     data: users,
   };
