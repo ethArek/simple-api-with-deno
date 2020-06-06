@@ -1,6 +1,6 @@
 import DbConnection from '../../db/mod.ts';
 import { User } from '../../types/user.ts';
-import { Collection } from '../../../../.cache/deno/deps/https/deno.land/345a2232771e7a1c430213b24b7faed795c75fd4ab8e0e407c71b25690bf6fdf.ts.ts.ts';
+import { Collection } from 'https://deno.land/x/mongo@v0.7.0/mod.ts';
 
 export default class UserService {
   private usersCollection: Collection;

@@ -5,7 +5,7 @@ export interface BaseDependencies {
   userService: UserService;
 }
 
-export function getBaseDependencies(): BaseDependencies {
+function getBaseDependencies(): BaseDependencies {
   const dbConnection = new DbConnection();
   const userService = new UserService(dbConnection);
 
@@ -13,3 +13,5 @@ export function getBaseDependencies(): BaseDependencies {
     userService
   };
 }
+
+export const baseDependencies = getBaseDependencies();
