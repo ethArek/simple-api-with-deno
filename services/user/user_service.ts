@@ -1,30 +1,23 @@
-import DbConnection from "../../db/mod.ts";
-import { User } from "../../types/user.ts";
+import DbConnection from '../../db/mod.ts';
+import { User } from '../../types/user.ts';
+import { Collection } from '../../../../.cache/deno/deps/https/deno.land/345a2232771e7a1c430213b24b7faed795c75fd4ab8e0e407c71b25690bf6fdf.ts.ts.ts';
 
 export default class UserService {
-  private dbConn!: DbConnection;
+  private usersCollection: Collection;
 
-  constructur(dbConn: DbConnection) {
-    this.dbConn = dbConn;
+  constructor(dbConn: DbConnection) {
+    this.usersCollection = dbConn.db.collection('users');
   }
 
   public async getAll() {
-    const users = await this.dbConn.db
-      .collection("users")
-      .find();
+    return this.usersCollection.find();
   }
 
   public async getById(id: string) {
-    const user = await this.dbConn.db
-      .collection("users")
-      .findOne({ _id: id });
+    return this.usersCollection.findOne({ _id: id });
   }
 
-  public async insert(body: Omit<User, "_id">) {
-    const user = await this.dbConn.db
-      .collection("users")
-      .insertOne(body);
-
-    return user;
+  public async insert(body: Omit<User, '_id'>) {
+    return this.usersCollection.insertOne(body);
   }
 }

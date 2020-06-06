@@ -1,19 +1,15 @@
-import DbConnection from "../db/mod.ts";
-import UserService from "../services/user/user_service.ts";
+import DbConnection from '../db/mod.ts';
+import UserService from '../services/user/user_service.ts';
 
-interface BaseDependencies {
+export interface BaseDependencies {
   userService: UserService;
-  dbConnection: DbConnection;
 }
 
-function getDependencies(): BaseDependencies {
+export function getBaseDependencies(): BaseDependencies {
   const dbConnection = new DbConnection();
-  const userService = new UserService();
+  const userService = new UserService(dbConnection);
 
   return {
-    userService,
-    dbConnection,
+    userService
   };
 }
-
-export { getDependencies };
